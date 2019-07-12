@@ -6,16 +6,19 @@
 
 <!-- vim-markdown-toc GFM -->
 
-* [Existing tools](#existing-tools)
+* [ROM](#rom)
+	* [Existing tools](#existing-tools)
 	* [Balong flash](#balong-flash)
-		* [Translated CLI help](#translated-cli-help)
-		* [Flashing ROM](#flashing-rom)
-		* [Getting partition info](#getting-partition-info)
-* [Extracting ROM](#extracting-rom)
+			* [Translated CLI help](#translated-cli-help)
+			* [Flashing ROM](#flashing-rom)
+			* [Getting partition info](#getting-partition-info)
+	* [Extracting ROM](#extracting-rom)
 
 <!-- vim-markdown-toc -->
 
-## Existing tools
+## ROM
+
+### Existing tools
 
 * [Balong flash](https://github.com/forth32/balongflash)
 * [Balong USBLoad](https://github.com/forth32/balong-usbdload)
@@ -26,7 +29,7 @@ Balong flash is toolkit for flashing ROMs to balong hardware.
 
 It can be used for parsing ROM info and getting more info on ROMs. 
 
-#### Translated CLI help
+##### Translated CLI help
 
 ```
 The utility is designed for flashing modems on the Balong V7 chipset.
@@ -49,7 +52,7 @@ balongflash [keys] <file name to load or the name of the file directory>
 -d # - set the type of firmware (DLOAD_ID, 0..7), -dl - list of types
 ```
 
-#### Flashing ROM
+##### Flashing ROM
 
 `/dev/ttyUSB0` is serial device from balong device, in "flash" mode. 
 
@@ -59,7 +62,7 @@ balongflash [keys] <file name to load or the name of the file directory>
 sudo balongflash -p /dev/ttyUSB0 ./E3372h-153_UPDATE_22.315.01.00.00.BIN
 ```
 
-#### Getting partition info
+##### Getting partition info
 
 `E3372h-153_UPDATE_22.315.01.00.00.BIN` is binary update file. 
 
@@ -97,7 +100,7 @@ Output:
  09 018c8b08  2649600  APP
 ```
 
-## Extracting ROM
+### Extracting ROM
 
 First you need to [get partition details](#getting-partition-info) using balongflash. 
 
