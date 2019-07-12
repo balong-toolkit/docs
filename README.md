@@ -8,6 +8,7 @@ Get ready for a lot of bad JavaScript, russian documentation and weird looking t
 
 <!-- vim-markdown-toc GFM -->
 
+* [Getting access to modem](#getting-access-to-modem)
 * [Working with ROM](#working-with-rom)
 	* [Existing tools](#existing-tools)
 		* [Balong flash](#balong-flash)
@@ -19,7 +20,13 @@ Get ready for a lot of bad JavaScript, russian documentation and weird looking t
 
 <!-- vim-markdown-toc -->
 
+## Getting access to modem
+
+[Credits go to rust3028 from 4pda](https://4pda.ru/forum/index.php?s=&showtopic=582284&view=findpost&p=37475499)
+
 ## Working with ROM
+
+This section is about understanding ROM, updates, extracting, packing ROMs and flashing them. 
 
 ### Existing tools
 
