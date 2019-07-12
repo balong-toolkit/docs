@@ -207,6 +207,7 @@ binwalk -evP app
 ## Other resources
 
 * [4pda topic for E3372h](https://4pda.ru/forum/index.php?showtopic=582284)
+* [osmocom docs for E3372h](https://osmocom.org/projects/huawei-modems/wiki/E3533/13)
 
 ## Credits
 
