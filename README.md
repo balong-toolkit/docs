@@ -11,7 +11,7 @@
 	* [Translated CLI help](#translated-cli-help)
 		* [Flashing ROM](#flashing-rom)
 		* [Getting partition info](#getting-partition-info)
-		* [](#)
+* [Extracting ROM](#extracting-rom)
 
 <!-- vim-markdown-toc -->
 
@@ -97,5 +97,33 @@ Output:
  09 018c8b08  2649600  APP
 ```
 
-#### 
+## Extracting ROM
+
+First you need to [get partition details](#getting-partition-info) using balongflash. 
+
+Let's say we want to extract APP partition with details like these: 
+
+```
+ 09 018c8b08  2649600  APP
+```
+
+Second number is in hex format and needs to be converted to decimal (in this case, it is 25987848). It is offset of where ROM is in update file. 
+
+Third number is size of that partition. 
+
+First we need to separate that partition from the rest of the ROM. 
+
+We can use dd for this. 
+
+```bash
+dd if=E3372h-153_UPDATE_22.315.01.00.00.BIN of=system skip=25987848 count=2649600 bs=1 status=progress
+```
+
+That leaves us with `cpio` filesystem. 
+
+Easiest way you can extract it is using binwalk. 
+
+```bash
+binwalk -evP app
+```
 
