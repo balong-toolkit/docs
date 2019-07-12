@@ -8,7 +8,7 @@
 
 * [Existing tools](#existing-tools)
 	* [Balong flash](#balong-flash)
-	* [Translated CLI help](#translated-cli-help)
+		* [Translated CLI help](#translated-cli-help)
 		* [Flashing ROM](#flashing-rom)
 		* [Getting partition info](#getting-partition-info)
 * [Extracting ROM](#extracting-rom)
@@ -26,7 +26,7 @@ Balong flash is toolkit for flashing ROMs to balong hardware.
 
 It can be used for parsing ROM info and getting more info on ROMs. 
 
-### Translated CLI help
+#### Translated CLI help
 
 ```
 The utility is designed for flashing modems on the Balong V7 chipset.
