@@ -9,13 +9,14 @@ Get ready for a lot of bad JavaScript, russian documentation and weird looking t
 <!-- vim-markdown-toc GFM -->
 
 * [Getting access to modem](#getting-access-to-modem)
-* [Enabling dev mode](#enabling-dev-mode)
+* [Enabling debbuging mode](#enabling-debbuging-mode)
 * [Working with ROM](#working-with-rom)
 	* [Existing tools](#existing-tools)
 		* [Balong flash](#balong-flash)
 	* [Flashing ROM](#flashing-rom)
 	* [Getting partition info](#getting-partition-info)
 	* [Extracting ROM](#extracting-rom)
+* [Running bulk commands](#running-bulk-commands)
 * [Other resources](#other-resources)
 * [Credits](#credits)
 
@@ -25,7 +26,7 @@ Get ready for a lot of bad JavaScript, russian documentation and weird looking t
 
 I am going to assume you already have your modem unlocked. 
 
-First thing you need to do is to enable [dev mode](#enabling-dev-mode).
+First thing you need to do is to enable [debugging mode](#enabling-debbuging-mode).
 
 After that, what we need to do is to set OEM password (unless you know what it is and do not want to change it)
 
@@ -47,7 +48,7 @@ Now, restart it using this command:
 at^reset
 ```
 
-And after that put it back into dev mode. 
+And after that put it back into debugging mode. 
 
 Now, look for serial device that is printing out messages like these: 
 
@@ -62,7 +63,7 @@ Now, you will get `EUAP>` prompt and now you can either start `/bin/sh` or start
 
 [Credits go to rust3028 from 4pda](https://4pda.ru/forum/index.php?s=&showtopic=582284&view=findpost&p=37475499)
 
-## Enabling dev mode
+## Enabling debbuging mode
 
 First, create `sw_debug_mode.xml` with this content:
 
@@ -202,6 +203,25 @@ Easiest way you can extract it is using binwalk.
 
 ```bash
 binwalk -evP app
+```
+
+## Running bulk commands
+
+```bash
+# Setup all interfaces
+for interface in $(ip addr | grep enp0s20f0u6 | cut -d":" -f2 | grep -v inet); do
+	echo $interface
+	sudo dhclient $interface
+done;
+
+sleep 5
+
+# Put all modems into debugging mode
+
+for interface in $(ip addr | grep enp0s20f0u6 | cut -d":" -f2 | grep -v inet); do
+	echo $interface
+	timeout 3 curl --interface $interface -X POST -d @sw_debug_mode.xml http://192.168.8.1/CGI
+done;
 ```
 
 ## Other resources
