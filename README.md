@@ -9,6 +9,7 @@ Get ready for a lot of bad JavaScript, russian documentation and weird looking t
 <!-- vim-markdown-toc GFM -->
 
 * [Getting access to modem](#getting-access-to-modem)
+* [Enabling dev mode](#enabling-dev-mode)
 * [Working with ROM](#working-with-rom)
 	* [Existing tools](#existing-tools)
 		* [Balong flash](#balong-flash)
@@ -22,7 +23,70 @@ Get ready for a lot of bad JavaScript, russian documentation and weird looking t
 
 ## Getting access to modem
 
+I am going to assume you already have your modem unlocked. 
+
+First thing you need to do is to enable [dev mode](#enabling-dev-mode).
+
+After that, what we need to do is to set OEM password (unless you know what it is and do not want to change it)
+
+Connect to `AT` command serial like this: `screen /dev/ttyUSB0` and then, send this command: 
+
+```
+at^sethwlock="OEM",00000000
+```
+
+Now enable UEAP prompt using this command: 
+
+```
+AT^NVWREX=33,0,4,2,0,0,0
+```
+
+Now, restart it using this command: 
+
+```
+at^reset
+```
+
+And after that put it back into dev mode. 
+
+Now, look for serial device that is printing out messages like these: 
+
+```
+[000119311ms] U_ACM:(U_ERROR)acm_setup():acm ttyGS0 req21.22 v0003 i0004 l0
+[000119318ms] U_ACM:(U_ERROR)acm_setup():acm ttyGS0 req21.22 v0003 i0004 l0
+```
+
+On that device, press enter, and you will be prompted for password. It is `00000000` if you set it in this step. 
+
+Now, you will get `EUAP>` prompt and now you can either start `/bin/sh` or start telnet server `busybox telnetd -l /bin/sh`.
+
 [Credits go to rust3028 from 4pda](https://4pda.ru/forum/index.php?s=&showtopic=582284&view=findpost&p=37475499)
+
+## Enabling dev mode
+
+First, create `sw_debug_mode.xml` with this content:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?> 
+<api version="1.0">
+  <header>
+    <function>switchMode</function>
+  </header>
+  <body>
+    <request>
+      <switchType>1</switchType> 
+    </request>
+  </body>
+</api>
+```
+
+Afther that, issue this command: 
+
+```bash
+timeout 3 curl -X POST -d @sw_debug_mode.xml http://192.168.8.1/CGI
+```
+
+Now, it should go to dev mode. 
 
 ## Working with ROM
 
