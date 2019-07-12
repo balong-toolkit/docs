@@ -1,32 +1,38 @@
 # docs
 
+Get ready for a lot of bad JavaScript, russian documentation and weird looking tools. 
+
 ![Modems](https://github.com/balong-toolkit/docs/raw/master/images/modems.jpg)
 
 ## Table of contents
 
 <!-- vim-markdown-toc GFM -->
 
-* [Existing tools](#existing-tools)
-* [Balong flash](#balong-flash)
-	* [Translated CLI help](#translated-cli-help)
-		* [Flashing ROM](#flashing-rom)
-		* [Getting partition info](#getting-partition-info)
-* [Extracting ROM](#extracting-rom)
+* [Working with ROM](#working-with-rom)
+	* [Existing tools](#existing-tools)
+		* [Balong flash](#balong-flash)
+	* [Flashing ROM](#flashing-rom)
+	* [Getting partition info](#getting-partition-info)
+	* [Extracting ROM](#extracting-rom)
+* [Other resources](#other-resources)
+* [Credits](#credits)
 
 <!-- vim-markdown-toc -->
 
-## Existing tools
+## Working with ROM
+
+### Existing tools
 
 * [Balong flash](https://github.com/forth32/balongflash)
 * [Balong USBLoad](https://github.com/forth32/balong-usbdload)
 
-## Balong flash
+#### Balong flash
 
 Balong flash is toolkit for flashing ROMs to balong hardware. 
 
 It can be used for parsing ROM info and getting more info on ROMs. 
 
-### Translated CLI help
+Translated CLI help:
 
 ```
 The utility is designed for flashing modems on the Balong V7 chipset.
@@ -49,7 +55,7 @@ balongflash [keys] <file name to load or the name of the file directory>
 -d # - set the type of firmware (DLOAD_ID, 0..7), -dl - list of types
 ```
 
-#### Flashing ROM
+### Flashing ROM
 
 `/dev/ttyUSB0` is serial device from balong device, in "flash" mode. 
 
@@ -59,7 +65,7 @@ balongflash [keys] <file name to load or the name of the file directory>
 sudo balongflash -p /dev/ttyUSB0 ./E3372h-153_UPDATE_22.315.01.00.00.BIN
 ```
 
-#### Getting partition info
+### Getting partition info
 
 `E3372h-153_UPDATE_22.315.01.00.00.BIN` is binary update file. 
 
@@ -97,7 +103,7 @@ Output:
  09 018c8b08  2649600  APP
 ```
 
-## Extracting ROM
+### Extracting ROM
 
 First you need to [get partition details](#getting-partition-info) using balongflash. 
 
@@ -126,4 +132,12 @@ Easiest way you can extract it is using binwalk.
 ```bash
 binwalk -evP app
 ```
+
+## Other resources
+
+* [4pda topic for E3372h](https://4pda.ru/forum/index.php?showtopic=582284)
+
+## Credits
+
+* [Flocksocial team](https://flocksocial.io)
 
